@@ -16,7 +16,7 @@ public class DealEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(columnDefinition = "BIGINT")
-    private long id;
+    private Long id;
 
     @ManyToOne(targetEntity = AdsEntity.class)
     @JoinColumn(name = "ads_id", columnDefinition = "BIGINT")

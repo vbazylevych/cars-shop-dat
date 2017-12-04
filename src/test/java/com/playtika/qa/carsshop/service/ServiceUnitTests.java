@@ -27,10 +27,10 @@ public class ServiceUnitTests {
     @Autowired
     private EntityManager em;
 
-    @Before
+ /*   @Before
     public void init() {
         carServiceRepository = new CarServiceRepositoryImpl(em);
-    }
+    } */
 
     @Test
     public void allCarsReturnsCars() {

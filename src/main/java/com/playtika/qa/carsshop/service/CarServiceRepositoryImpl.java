@@ -3,18 +3,22 @@ package com.playtika.qa.carsshop.service;
 
 import com.playtika.qa.carsshop.dao.entity.AdsEntity;
 import com.playtika.qa.carsshop.dao.entity.CarEntity;
+import com.playtika.qa.carsshop.dao.entity.CarEntityRepository;
 import com.playtika.qa.carsshop.dao.entity.UserEntity;
 import com.playtika.qa.carsshop.domain.Car;
 import com.playtika.qa.carsshop.domain.CarInStore;
 import com.playtika.qa.carsshop.domain.CarInfo;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.criterion.Example;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
+import java.awt.print.Pageable;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
@@ -32,9 +36,18 @@ public class CarServiceRepositoryImpl implements CarServiceRepository {
     @PersistenceContext
     private EntityManager em;
 
+    private CarEntityRepository carEntityRepository;
+
     @Transactional
     @Override
     public CarInStore add(CarInStore carInStore) {
+      //  Car car = new Car("fff");
+      // Example<Car> example = Example.of(car)       ;
+
+List<CarEntity> list = carEntityRepository.findByYear("2000");
+// repository.findByYearAndBrand(2015, mds", new Sopt new )
+        Pageable pageable  new PageRequest(1, 20);
+
 
         List<CarEntity> carEntities = findCarEntities(carInStore);
         if (carEntities.isEmpty()) {
@@ -99,8 +112,8 @@ public class CarServiceRepositoryImpl implements CarServiceRepository {
     private AdsEntity createAndSaveAdsEntities(CarInStore carInStore, UserEntity user, CarEntity car) {
         AdsEntity adsEntity = new AdsEntity(user, car,
                 carInStore.getCarInfo().getPrice(), null);
-        em.persist(adsEntity);
-        em.flush();
+       em.persist(adsEntity);
+      //  em.flush();
         return adsEntity;
     }
 
@@ -108,15 +121,15 @@ public class CarServiceRepositoryImpl implements CarServiceRepository {
         Car newCar = carInStore.getCar();
         CarEntity carEntity = new CarEntity(newCar.getPlate_number(),
                 newCar.getModel(), newCar.getYear(), newCar.getColor());
-        em.persist(carEntity);
-        em.flush();
+       // em.persist(carEntity);
+      //  em.flush();
         return carEntity;
     }
 
     private UserEntity createAndSaveUserEntity(CarInStore carInStore) {
         UserEntity userEntity = new UserEntity("Name", "", carInStore.getCarInfo().getContact());
-        em.persist(userEntity);
-        em.flush();
+      //  em.persist(userEntity);
+     //   em.flush();
         return userEntity;
     }
 

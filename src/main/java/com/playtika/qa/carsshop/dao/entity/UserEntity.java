@@ -17,7 +17,7 @@ public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(columnDefinition = "BIGINT")
-    private long id;
+    private Long id;
 
     @Column(nullable = false, length = 20)
     private String name;

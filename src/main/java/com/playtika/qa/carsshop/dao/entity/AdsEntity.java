@@ -20,13 +20,13 @@ public class AdsEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(columnDefinition = "BIGINT")
-    private long id;
+    private Long id;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn (name = "user_id", nullable = false, columnDefinition = "BIGINT")
     private UserEntity user;
 
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "car_id", nullable = false, columnDefinition = "BIGINT")
     private CarEntity car;
 
